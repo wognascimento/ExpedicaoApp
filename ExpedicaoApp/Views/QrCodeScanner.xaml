@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:gv="clr-namespace:BarcodeScanner.Mobile;assembly=BarcodeScanner.Mobile.Maui"
+             x:Class="ExpedicaoApp.Views.QrCodeScanner"
+             xmlns:viewmodel="clr-namespace:ExpedicaoApp.ViewModels"
+             x:DataType="viewmodel:LeitorQrCodeViewModel"
+             Title="CAPTURAR QRCODE FUNCIONÁRIO/PRODUTO">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" />
+    </Shell.BackButtonBehavior>
+
+
+
+        <gv:CameraView
+            x:Name="Camera"
+            OnDetected="CameraView_OnDetected" 
+            TorchOn="False" 
+            VibrationOnDetected="True" 
+            ScanInterval="2000" />
+
+
+    
+</ContentPage>

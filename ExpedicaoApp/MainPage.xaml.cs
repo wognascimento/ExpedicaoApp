@@ -1,4 +1,7 @@
-﻿namespace ExpedicaoApp
+﻿
+using ExpedicaoApp.Views.Enderecamento;
+
+namespace ExpedicaoApp
 {
     public partial class MainPage : ContentPage
     {
@@ -8,6 +11,10 @@
             InitializeComponent();
         }
 
+        async void OnButtonClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(Enderecamento));
+        }
     }
 
 }

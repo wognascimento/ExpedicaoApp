@@ -12,7 +12,8 @@
                 x:Name="BtnEnderecamento"
                 Text="Endereçamento Volume Shopping" 
                 SemanticProperties.Hint="Counts the number of times you click"
-                HorizontalOptions="Fill" />
+                HorizontalOptions="Fill" 
+                Clicked="OnButtonClicked"/>
 
 
             <Button

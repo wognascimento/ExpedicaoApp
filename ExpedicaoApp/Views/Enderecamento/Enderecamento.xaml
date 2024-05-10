@@ -1,14 +1,127 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
              x:Class="ExpedicaoApp.Views.Enderecamento.Enderecamento"
-             Title="Endereçamento Volume Shopping">
-    
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:viewmodel="clr-namespace:ExpedicaoApp.ViewModels"
+             Title="Endereçamento Volume">
+
+
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+                
+                <telerik:RadEntry 
+                    x:Name="local"
+                    Grid.Row="0"
+                    Grid.Column="0"  
+                    Placeholder="Localização."
+                    Text="{Binding EnderecamentoGalpao.Endereco}"
+                    IsReadOnly="True"/>
+
+                <Image 
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalOptions="End"
+                    Source="icons8_codigo_regiao.png"
+                    Aspect="AspectFill"
+                    HeightRequest="50"
+                    WidthRequest="50">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding Image1TappedCommand}"
+                            CommandParameter="ENDERECO"/>
+                    </Image.GestureRecognizers>
+
+                </Image>
+
+            <telerik:RadEntry 
+                x:Name="volume"
+                Grid.Row="1"
+                Grid.Column="0"  
+                Placeholder="Volume."
+                Text="{Binding Lookup.Qrcode}"
+                IsReadOnly="True"/>
+
+            <Image 
+                Grid.Row="1"
+                Grid.Column="1"
+                HorizontalOptions="End"
+                Source="icons8_volume.png"
+                Aspect="AspectFill"
+                HeightRequest="50"
+                WidthRequest="50">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer 
+                        Command="{Binding Image1TappedCommand}"
+                        CommandParameter="VOLUME"/>
+                </Image.GestureRecognizers>
+
+            </Image>
+
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="0,5,0,5"
+                FontSize="20"
+                Text="Volumes"
+                Background="#6251a1"
+                HorizontalTextAlignment="Center" 
+                VerticalTextAlignment="Center"/>
+
+
+        <telerik:RadListView 
+                x:Name="listView"
+                Grid.Row="3" 
+                Grid.ColumnSpan="2"
+                IsItemsReorderEnabled="True"
+                SelectionMode="None"
+                ItemsSource="{Binding Movimentacoes}">
+
+            <telerik:RadListView.ItemTemplate>
+                <DataTemplate>
+                    <telerik:ListViewTextCell Text="{Binding SiglaServ}" 
+                                      Detail="{Binding Barcode}" 
+                                      TextColor="Black" 
+                                      DetailColor="Gray" />
+                </DataTemplate>
+            </telerik:RadListView.ItemTemplate>
+            <telerik:RadListView.LayoutDefinition>
+                <telerik:ListViewLinearLayout ItemLength="60" />
+            </telerik:RadListView.LayoutDefinition>
+
+        </telerik:RadListView>
+
+            <Button
+                x:Name="BtnRomaneio"
+                Grid.Row="4"  
+                Grid.ColumnSpan="2"
+                Text="Enviar Volumes Endereçados" 
+                SemanticProperties.Hint="Counts the number of times you click"
+                HorizontalOptions="Fill" 
+                Command="{Binding SendCommand}"/> 
+
+
+
+
+
+
+
+        </Grid>
+
+
     
 </ContentPage>

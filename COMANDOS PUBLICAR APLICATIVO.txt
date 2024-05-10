@@ -1,0 +1,5 @@
+keytool -genkeypair -v -keystore ExpedicaoApp.keystore -alias ExpedicaoApp -keyalg RSA -keysize 2048 -validity 10000
+
+SENHA: 1@3mudar
+
+dotnet publish -f net8.0-android -c Release -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=..\ExpedicaoApp.keystore -p:AndroidSigningKeyAlias=ExpedicaoApp -p:AndroidSigningKeyPass=1@3mudar -p:AndroidSigningStorePass=1@3mudar
