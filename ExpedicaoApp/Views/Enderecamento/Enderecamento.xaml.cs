@@ -33,7 +33,7 @@ public partial class Enderecamento : ContentPage
         try
         {
 
-            if (vm.Acao == "ENDERECO")
+            if (vm.Acao == "Endereço")
             {
                 string apiUrl = "https://api.cipolatti.com.br:44366/api/MovimentacaoVolumeShopping/Endereco"; 
                 string urlComParametro = $"{apiUrl}?Barcode={parametro}";
@@ -45,11 +45,10 @@ public partial class Enderecamento : ContentPage
                 }
                 else
                 {
-                    //Console.WriteLine($"Erro: {response.StatusCode} - {response.ReasonPhrase}");
                     await DisplayAlert("Erro", $"{response.StatusCode} - {response.ReasonPhrase}", "OK");
                 }
             }
-            else if (vm.Acao == "VOLUME")
+            else if (vm.Acao == "Volume")
             {
                 string apiUrl = "https://api.cipolatti.com.br:44366/api/MovimentacaoVolumeShopping/Volume";
                 string urlComParametro = $"{apiUrl}?qrcode={parametro}";
@@ -64,17 +63,14 @@ public partial class Enderecamento : ContentPage
                         if (found != null)
                         {
                             int indice = vm.Movimentacoes.IndexOf(found);
-                            //vm.Movimentacoes[indice].Quantidade++;
                             listView.EndRefresh();
                         }
                         else
-                            //vm.Movimentacoes.Add(new MovimentacaoVolumeShoppingModel { BarcodeEndereco = vm.EnderecamentoGalpao.Barcode, BarcodeVolume = vm.Lookup.Barcode, InseridoPor = "APLICATIVO", InseridoEm = DateTime.Now });
                             vm.Movimentacoes.Add(vm.Lookup);
                     }
                 }
                 else
                 {
-                    //Console.WriteLine($"Erro: {response.StatusCode} - {response.ReasonPhrase}");
                     await DisplayAlert("Erro", $"{response.StatusCode} - {response.ReasonPhrase}", "OK");
                 }
             }

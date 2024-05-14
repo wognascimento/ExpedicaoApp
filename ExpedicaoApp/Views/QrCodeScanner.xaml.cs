@@ -11,8 +11,8 @@ public partial class QrCodeScanner : ContentPage
 
         BindingContext = vm;
 #if ANDROID
-        BarcodeScanner.Mobile.Methods.AskForRequiredPermission();
-        BarcodeScanner.Mobile.Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode);
+        Methods.AskForRequiredPermission();
+        Methods.SetSupportBarcodeFormat(BarcodeFormats.QRCode);
 #endif
     }
 
