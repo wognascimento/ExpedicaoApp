@@ -22,7 +22,7 @@ public partial class QrCodeScanner : ContentPage
 
         LeitorQrCodeViewModel vm = (LeitorQrCodeViewModel)BindingContext;
 
-        Title = $@"CAPTURAR QRCODE {vm.Acao}";
+        Title = $@"Capturar QR Code {vm.Acao}";
     }
 
     private void CameraView_OnDetected(object sender, OnDetectedEventArg e)
