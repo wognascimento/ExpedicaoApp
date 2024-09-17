@@ -1,0 +1,84 @@
+﻿namespace ExpedicaoApp.Model
+{
+    public class QryAprovados
+    {
+
+        public float? Ordem { get; set; }
+        public float? OrdemSiglaServ { get; set; }
+        public int? Nivel { get; set; }
+        public DateTime? DataAprovado { get; set; }
+        public DateOnly? DataDeExpedicao { get; set; }
+        public DateTime? MetaProducao { get; set; }
+        public string Sigla { get; set; }
+        public string SiglaServ { get; set; }
+        public string Nome { get; set; }
+        public string Tema { get; set; }
+        public string ObsEspecial { get; set; }
+        public string RespCliente { get; set; }
+        public string Est { get; set; }
+        public string Cidade { get; set; }
+        public string MemoResp { get; set; }
+        public DateOnly? MemoData { get; set; }
+        public string ChkResp { get; set; }
+        public DateOnly? ChkData { get; set; }
+        public DateTime? CronogData { get; set; }
+        public string CronogResp { get; set; }
+        public string AsBuiltPlantas { get; set; }
+        public DateTime? AsBuiltPlantasData { get; set; }
+        public string RelInflamabilidade { get; set; }
+        public DateOnly? DataRelInflamabilidade { get; set; }
+        public DateOnly? MetaRelInflamabilidade { get; set; }
+        public string Pa { get; set; }
+        public string MlampLed { get; set; }
+        public string ObsIluminacao { get; set; }
+        public string RespMemoVisual { get; set; }
+        public DateOnly? DataMemoVisual { get; set; }
+        public string RespCenas { get; set; }
+        public string RespTrilha { get; set; }
+        public DateOnly? DataReuniaoConceito { get; set; }
+        public string RespPlantaPca { get; set; }
+        public DateOnly? PrazoPlantaPca { get; set; }
+        public DateOnly? ConclusaoPlantaPca { get; set; }
+        public string RespRevisaoPlanta { get; set; }
+        public DateOnly? DataRevisaoPlanta { get; set; }
+        public string ObsRevisao { get; set; }
+        public bool? OkPlantaPca { get; set; }
+        public string PlantaPca { get; set; }
+        public DateTime? LiberacaoPlantaPca { get; set; }
+        public string RespPlantaMall { get; set; }
+        public DateOnly? PrazoPlantaMall { get; set; }
+        public bool? OkPlantaMall { get; set; }
+        public string PlantaMall { get; set; }
+        public DateTime? ConclusaoPlantaMall { get; set; }
+        public string Laco { get; set; }
+        public string AcabamentoConstrucao { get; set; }
+        public string AcabamentoFibra { get; set; }
+        public string AcabamentoMoveis { get; set; }
+        public string Rede { get; set; }
+        public string MemorialVisualLiberadoPor { get; set; }
+        public DateOnly? MemorialVisualLiberadoEm { get; set; }
+        public double? SomadecubagemTotal { get; set; }
+        public string TipoEvento { get; set; }
+        public string DiviCaminhao { get; set; }
+        public string RespPlantaFachada { get; set; }
+        public DateOnly? PrazoPlantaFachada { get; set; }
+        public bool? OkPlantaFachada { get; set; }
+        public string PlantaFachada { get; set; }
+        public DateTime? ConclusaoPlantaFachada { get; set; }
+        public string RespEstruturas { get; set; }
+        public string ProjetoNovo { get; set; }
+        public int? IdAprovado { get; set; }
+        public string CorPredominante { get; set; }
+        public string RespPlantaBase { get; set; }
+        public DateOnly? PrazoPlantaBase { get; set; }
+        public DateOnly? ConclusaoPlantaBase { get; set; }
+        public string RespRevisaoPlantaBase { get; set; }
+        public DateOnly? DataRevisaoPlantaBase { get; set; }
+        public bool? OkPlantaBase { get; set; }
+        public string PlantaBase { get; set; }
+        public DateTime? LiberacaoPlantaBase { get; set; }
+        public string RespRevisaoComite { get; set; }
+        public DateOnly? DataRevisaoComite { get; set; }
+        public string RevisaoCusto { get; set; }
+    }
+}

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExpedicaoApp.Views.VolumeShopping.VolumeShopping"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             xmlns:gv="clr-namespace:BarcodeScanner.Mobile;assembly=BarcodeScanner.Mobile.Maui"
+             xmlns:viewmodel="clr-namespace:ExpedicaoApp.ViewModels"
+             x:DataType="viewmodel:VolumeShoppingViewModel" 
+             Title="Volumes Shopping" Loaded="ContentPage_Loaded">
+
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+
+
+        <telerik:RadEntry
+            x:Name="cliente"
+            Grid.Row="0"
+            Grid.Column="0"  
+
+            Placeholder="Cliente."
+            Text="{Binding Siglas}"
+            IsReadOnly="True"/>
+
+        
+            <Image
+                Grid.Row="0"
+                Grid.Column="1"
+                HorizontalOptions="End"
+                Source="icons8_tarefa_concluida.png"
+                Aspect="AspectFill"
+                HeightRequest="50"
+                WidthRequest="50">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer 
+                        Command="{Binding FinalizarCommand}"
+                        CommandParameter="Endereço"/>
+                </Image.GestureRecognizers>
+
+            </Image>
+            
+
+        <telerik:RadEntry 
+            x:Name="volume"
+            Grid.Row="1"
+            Grid.Column="0"  
+            Placeholder="Volume."
+            Text="{Binding LookupModel.Qrcode, Mode=TwoWay}"
+            Keyboard="Numeric"
+            ReturnType="Done"
+            ReturnCommand="{Binding SaveVolumeManualCommand}"/>
+
+        <Image 
+            Grid.Row="1"
+            Grid.Column="1"
+            HorizontalOptions="End"
+            Source="icons8_volume.png"
+            Aspect="AspectFill"
+            HeightRequest="50"
+            WidthRequest="50">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer 
+                    Command="{Binding VolumeCommand}"
+                    CommandParameter="Volume"/>
+            </Image.GestureRecognizers>
+        </Image>
+        <!-- 
+        <Image 
+            IsVisible="{Binding IsObjectVolume}"
+            Grid.Row="1"
+            Grid.Column="1"
+            HorizontalOptions="End"
+            Source="icons8_scanner.png"
+            Aspect="AspectFill"
+            HeightRequest="50"
+            WidthRequest="50">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer 
+                    Command="{Binding ScannerCommand}"
+                    CommandParameter="Volume"/>
+            </Image.GestureRecognizers>
+        </Image>
+      
+        <Label
+            IsVisible="{Binding IsObjectVolume}"
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Margin="0,5,0,5"
+            FontSize="20"
+            Text="Volumes"
+            Background="#6251a1"
+            HorizontalTextAlignment="Center" 
+            VerticalTextAlignment="Center"/>
+
+        <telerik:RadListView 
+            IsVisible="{Binding IsObjectVolume}"
+            x:Name="listView"
+            Grid.Row="3" 
+            Grid.ColumnSpan="2"
+            IsItemsReorderEnabled="True"
+            SelectionMode="None"
+            ItemsSource="{Binding Movimentacoes}">
+            <telerik:RadListView.ItemTemplate>
+                <DataTemplate>
+                    <telerik:ListViewTextCell
+                            Text="{Binding SiglaServ}" 
+                            Detail="{Binding Barcode}" 
+                            TextColor="Black" 
+                            DetailColor="Gray" />
+                </DataTemplate>
+            </telerik:RadListView.ItemTemplate>
+            <telerik:RadListView.LayoutDefinition>
+                <telerik:ListViewLinearLayout ItemLength="60" />
+            </telerik:RadListView.LayoutDefinition>
+        </telerik:RadListView>
+-->
+        <gv:CameraView
+            x:Name="Camera"
+            Grid.Row="3" 
+            Grid.ColumnSpan="2"
+            OnDetected="CameraView_OnDetected" 
+            TorchOn="False" 
+            IsScanning="True"
+            VibrationOnDetected="True" 
+            ScanInterval="2000" />
+
+
+        <Grid 
+            Grid.Row="4"
+            Grid.ColumnSpan="2"
+            VerticalOptions="End">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button
+                x:Name="send"
+                Grid.Column="0"
+                Text="{Binding ButtonText}" 
+                HeightRequest="40" 
+                BackgroundColor="Green"
+                CornerRadius="0" 
+                Command="{Binding SendVolumesCommand}"/>
+
+
+            <telerik:RadBusyIndicator
+                x:Name="BusyIndicator"
+                Grid.Column="1"
+                AnimationContentColor="#2374FF"
+                AnimationType="Animation2"
+                IsBusy="{Binding IsLoading}"/>
+
+        </Grid>
+ <!--
+        <Button
+            x:Name="BtnRomaneio"
+            Grid.Row="4"  
+            Grid.ColumnSpan="2"
+            Text="Enviar Volumes Carregados" 
+            SemanticProperties.Hint="Counts the number of times you click"
+            HorizontalOptions="Fill" 
+            Command="{Binding SendCommand}"/>
+-->        
+    </Grid>
+
+
+</ContentPage>

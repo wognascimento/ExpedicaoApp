@@ -98,30 +98,56 @@
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Remove="Resources\Images\icons8_tarefa_concluida.png" />
+	  <None Remove="Resources\Raw\error.mp3" />
+	  <None Remove="Resources\Raw\sucess.mp3" />
+	</ItemGroup>
+
 
 	<ItemGroup>
-		<PackageReference Include="BarcodeScanner.Mobile.Maui" Version="8.0.21" />
+		<PackageReference Include="BarcodeScanner.Mobile.Maui" Version="8.0.40.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.21" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.21" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.60" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.60" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Plugin.Maui.Audio" Version="3.0.0" />
+		<PackageReference Include="SkiaSharp" Version="2.88.8" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.8" />
 		<PackageReference Include="Syncfusion.Maui.Core" Version="24.1.47" />
+		<PackageReference Include="Syncfusion.Maui.ProgressBar" version="24.1.47" />
+		<PackageReference Include="Syncfusion.Maui.TabView" version="24.1.47" />
+		<PackageReference Include="Syncfusion.Maui.DataSource" version="24.1.47" />
+		<PackageReference Include="Syncfusion.Maui.GridCommon" version="24.1.47" />
+		<PackageReference Include="Syncfusion.Maui.ListView" version="24.1.47" />
+		<PackageReference Include="Syncfusion.Maui.Inputs" version="24.1.47" />
+		<PackageReference Include="Syncfusion.Maui.Buttons" version="24.1.47" />
+		<PackageReference Include="System.Security.Cryptography.Pkcs" Version="8.0.0" />
 		<PackageReference Include="Telerik.UI.for.Maui" Version="6.1.0" />
+		<PackageReference Include="Xamarin.Firebase.iOS.Core" Version="8.10.0.3" />
 	</ItemGroup>
 	
 	<ItemGroup Condition="( '$(TargetFramework)' == 'net8.0-android' )">
-		<PackageReference Include="Xamarin.AndroidX.Collection" Version="1.3.0.2" />
-		<PackageReference Include="Xamarin.AndroidX.Preference" Version="1.2.1.3" />
+		<PackageReference Include="Xamarin.AndroidX.Collection" Version="1.4.0.5" />
+		<PackageReference Include="Xamarin.AndroidX.Preference" Version="1.2.1.7" />
 	</ItemGroup>
 	
 	<ItemGroup>
 	  <MauiXaml Update="Views\Enderecamento\Enderecamento.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\PreConferencia\PreConferencia.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\QrCodeScanner.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Romaneio\Romaneio.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\VolumeShopping\VolumeShopping.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

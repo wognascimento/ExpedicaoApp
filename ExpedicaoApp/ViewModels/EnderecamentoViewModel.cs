@@ -21,10 +21,13 @@ namespace ExpedicaoApp.ViewModels
         private ObservableCollection<LookupModel> movimentacoes = [];
 
         [ObservableProperty]
+        private ObservableCollection<MovimentacaoVolumeShoppingModel> volumes = [];
+
+        [ObservableProperty]
         private List<LeitorQRCodeModel> leitorQRCode =
             [
-                new LeitorQRCodeModel("ENDERECO", false),
-                new LeitorQRCodeModel("VOLUME", false),
+                new LeitorQRCodeModel("Endereço", false),
+                new LeitorQRCodeModel("Volume", false),
             ];
 
         [ObservableProperty]
@@ -36,8 +39,8 @@ namespace ExpedicaoApp.ViewModels
         {
             
             Acao = acao;
-            var lFuncunc = LeitorQRCode.FirstOrDefault(w => w.Tipo == "ENDERECO");
-            if (acao == "VOLUME" && lFuncunc.Leitura == false)
+            var lFuncunc = LeitorQRCode.FirstOrDefault(w => w.Tipo == "Endereço");
+            if (acao == "Volume" && lFuncunc.Leitura == false)
                 return;
 
             var indexOf = LeitorQRCode.IndexOf(LeitorQRCode.Find(p => p.Tipo == acao));
@@ -61,51 +64,56 @@ namespace ExpedicaoApp.ViewModels
 
             foreach (LookupModel item in Movimentacoes)
             {
-                var movimentacao = new MovimentacaoVolumeShoppingModel { BarcodeEndereco = EnderecamentoGalpao.Barcode, BarcodeVolume = item.Barcode, InseridoPor = "APLICATIVO", InseridoEm = DateTime.Now };
+                //var movimentacao = new MovimentacaoVolumeShoppingModel { BarcodeEndereco = EnderecamentoGalpao.Barcode, BarcodeVolume = item.Barcode, InseridoPor = "APLICATIVO", InseridoEm = DateTime.Now };
+                Volumes.Add(
+                    new MovimentacaoVolumeShoppingModel 
+                    { 
+                        BarcodeEndereco = EnderecamentoGalpao.Barcode, 
+                        BarcodeVolume = item.Barcode, 
+                        InseridoPor = "APLICATIVO", 
+                        //InseridoEm = DateTime.Now 
+                    });
+            }
 
-                ///api/SaidaAlmox/almoxMovSaida
-                string apiUrl = "https://api.cipolatti.com.br:44366/api/MovimentacaoVolumeShopping/GravarVolume";
-                JsonSerializerOptions options = new()
+            //api/SaidaAlmox/almoxMovSaida
+            string apiUrl = "https://api.cipolatti.com.br:44366/api/MovimentacaoVolumeShopping/GravarVolume";
+            JsonSerializerOptions options = new()
+            {
+                WriteIndented = true
+            };
+            //string jsonParametro = JsonSerializer.Serialize(Volumes, options);
+            string jsonParametro = JsonSerializer.Serialize(Volumes);
+            HttpClientHandler handler = new()
+            {
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
+            };
+
+            HttpContent content = new StringContent(jsonParametro, Encoding.UTF8, "application/json");
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            using HttpClient client = new(handler);
+            try
+            {
+                HttpResponseMessage response = await client.PostAsync(apiUrl, content);
+                if (response.IsSuccessStatusCode)
                 {
-                    WriteIndented = true
-                };
-                string jsonParametro = JsonSerializer.Serialize(movimentacao, options);
-                HttpClientHandler handler = new()
-                {
-                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
-                };
+                    string responseBody = await response.Content.ReadAsStringAsync();
 
-                var parametro = new
-                {
-                    movimentacao
-                };
-
-                var content = new StringContent(jsonParametro, Encoding.UTF8, "application/json");
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-                using HttpClient client = new(handler);
-                try
-                {
-                    HttpResponseMessage response = await client.PostAsync(apiUrl, content);
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string responseBody = await response.Content.ReadAsStringAsync();
-
-                        await App.Current.MainPage.DisplayAlert("Sucesso", responseBody, "OK");
-                        await Shell.Current.GoToAsync("..");
-                    }
-                    else
-                    {
-                        //Console.WriteLine($"Erro: {response.StatusCode} - {response.ReasonPhrase}");
-                        await App.Current.MainPage.DisplayAlert("Erro", $"{response.StatusCode} - {response.ReasonPhrase}", "OK");
-                    }
+                    await App.Current.MainPage.DisplayAlert("Sucesso", responseBody, "OK");
+                    await Shell.Current.GoToAsync("..");
                 }
-                catch (Exception ex)
+                else
                 {
-                    //Console.WriteLine($"Ocorreu um erro: {ex.Message}");
-                    await App.Current.MainPage.DisplayAlert("Erro", $"{ex.Message}", "OK");
+                    //Console.WriteLine($"Erro: {response.StatusCode} - {response.ReasonPhrase}");
+                    await Application.Current.MainPage.DisplayAlert("Erro", $"{response.StatusCode} - {response.ReasonPhrase}", "OK");
                 }
             }
+            catch (Exception ex)
+            {
+                //Console.WriteLine($"Ocorreu um erro: {ex.Message}");
+                await App.Current.MainPage.DisplayAlert("Erro", $"{ex.Message}", "OK");
+            }
+
         }
 
     }

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExpedicaoApp.Views.Romaneio.Romaneio"
+             xmlns:core="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:themes="clr-namespace:Syncfusion.Maui.Core.Themes;assembly=Syncfusion.Maui.Inputs"
+             xmlns:viewmodel="clr-namespace:ExpedicaoApp.ViewModels"
+             x:DataType="viewmodel:RomaneioViewModel" 
+             Title="Romaneio" Loaded="ContentPage_Loaded">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <core:SfTextInputLayoutStyles></core:SfTextInputLayoutStyles>
+                <ResourceDictionary>
+                    <x:String x:Key="SfComboBoxTheme">CommonTheme</x:String>
+                    <Color x:Key="SfComboBoxNormalDropdownItemsTextColor">Red</Color>
+                    <Color x:Key="SfComboBoxDropdownBackground">YellowGreen</Color>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <core:SfTextInputLayout 
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Hint="Cliente" 
+                ReserveSpaceForAssistiveLabels="False"
+                InputViewPadding="7"
+                ContainerBackground="#fff"
+                ContainerType="Outlined">
+                <editors:SfComboBox  
+                    x:Name="sigla"
+                    IsEditable="true"
+                    ItemsSource="{Binding Aprovados}" 
+                    DisplayMemberPath = "SiglaServ"
+                    TextMemberPath = "SiglaServ"
+                    SelectedValuePath="SiglaServ"
+                    SelectedValue="{Binding Romaneio.ShoppingDestino, Mode=TwoWay}"/>
+            </core:SfTextInputLayout>
+
+            <core:SfTextInputLayout 
+                Grid.Row="0"
+                Grid.Column="2"
+                Hint="Data" 
+                ReserveSpaceForAssistiveLabels="False"
+                InputViewPadding="7"
+                ContainerBackground="#fff"
+                ContainerType="Outlined">
+                <DatePicker Date="{Binding Romaneio.DataCarregamento, Mode=TwoWay}"/>
+            </core:SfTextInputLayout>
+
+
+            <core:SfTextInputLayout 
+                Grid.Row="0"
+                Grid.Column="3"
+                Hint="Caminhão" 
+                ReserveSpaceForAssistiveLabels="False"
+                InputViewPadding="7"
+                ContainerBackground="#fff"
+                ContainerType="Outlined">
+                <editors:SfAutocomplete x:Name="caminhao" Text="{Binding Romaneio.NumeroCaminhao, Mode=TwoWay}"/>
+            </core:SfTextInputLayout>
+            
+            <core:SfTextInputLayout 
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="4"
+                Hint="Transportadora" 
+                ReserveSpaceForAssistiveLabels="False"
+                InputViewPadding="7"
+                ContainerBackground="#fff"
+                ContainerType="Outlined">
+                <editors:SfComboBox  
+                    x:Name="transportadora"
+                    IsEditable="true"
+                    ItemsSource="{Binding Tranportadoras}" 
+                    DisplayMemberPath = "Nometransportadora"
+                    TextMemberPath = "Nometransportadora"
+                    SelectedValuePath="Codtransportadora"
+                    SelectedValue="{Binding Romaneio.Codtransportadora, Mode=TwoWay}"/>
+            </core:SfTextInputLayout>
+
+            <core:SfTextInputLayout 
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="4"
+                Hint="Motorista" 
+                ReserveSpaceForAssistiveLabels="False"
+                InputViewPadding="7"
+                ContainerBackground="#fff"
+                ContainerType="Outlined">
+                <editors:SfAutocomplete x:Name="motorista" Text="{Binding Romaneio.NomeMotorista, Mode=TwoWay}"/>
+            </core:SfTextInputLayout>
+
+            <core:SfTextInputLayout 
+                Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Hint="Telefone" 
+                ReserveSpaceForAssistiveLabels="False"
+                InputViewPadding="7"
+                ContainerBackground="#fff"
+                ContainerType="Outlined">
+                <editors:SfAutocomplete x:Name="telefone" Text="{Binding Romaneio.TelefoneMotorista, Mode=TwoWay}"/>
+            </core:SfTextInputLayout>
+
+            <core:SfTextInputLayout 
+                Grid.Row="3"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                Hint="CNH" 
+                ReserveSpaceForAssistiveLabels="False"
+                InputViewPadding="7"
+                ContainerBackground="#fff"
+                ContainerType="Outlined">
+                <editors:SfAutocomplete x:Name="cnh" Text="{Binding Romaneio.NumeroCnh, Mode=TwoWay}"/>
+            </core:SfTextInputLayout>
+
+            <core:SfTextInputLayout 
+                Grid.Row="4"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Hint="Condição do caminhão" 
+                ReserveSpaceForAssistiveLabels="False"
+                InputViewPadding="7"
+                ContainerBackground="#fff"
+                ContainerType="Outlined">
+                <editors:SfComboBox
+                    x:Name="condicao"
+                    ItemsSource="{Binding Condicao}"
+                    SelectedValue="{Binding Romaneio.CondicaoCaminhao, Mode=TwoWay}"/>
+            </core:SfTextInputLayout>
+
+            <core:SfTextInputLayout 
+                Grid.Row="5"
+                Grid.Column="0"
+                Hint="Cavalo" 
+                ReserveSpaceForAssistiveLabels="False"
+                InputViewPadding="7"
+                ContainerBackground="#fff"
+                ContainerType="Outlined">
+                <editors:SfAutocomplete x:Name="cavalo" Text="{Binding Romaneio.PlacaCarroceria, Mode=TwoWay}"/>
+            </core:SfTextInputLayout>
+
+            <core:SfTextInputLayout 
+                Grid.Row="5"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Hint="Cidade" 
+                ReserveSpaceForAssistiveLabels="False"
+                InputViewPadding="7"
+                ContainerBackground="#fff"
+                ContainerType="Outlined">
+                <editors:SfAutocomplete x:Name="cidade" Text="{Binding Romaneio.PlacaCarroceriaCidade, Mode=TwoWay}"/>
+            </core:SfTextInputLayout>
+
+            <core:SfTextInputLayout 
+                Grid.Row="5"
+                Grid.Column="3"
+                Hint="Estado" 
+                ReserveSpaceForAssistiveLabels="False"
+                InputViewPadding="7"
+                ContainerBackground="#fff"
+                ContainerType="Outlined">
+                <editors:SfAutocomplete x:Name="estado" Text="{Binding Romaneio.PlacaCarroceriaEstado, Mode=TwoWay}"/>
+            </core:SfTextInputLayout>
+
+
+            <core:SfTextInputLayout 
+                Grid.Row="6"
+                Grid.Column="0"
+                Hint="Carroce." 
+                ReserveSpaceForAssistiveLabels="False"
+                InputViewPadding="7"
+                ContainerBackground="#fff"
+                ContainerType="Outlined">
+                <editors:SfAutocomplete x:Name="carroceria" Text="{Binding Romaneio.PlacaCaminhao, Mode=TwoWay}"/>
+            </core:SfTextInputLayout>
+
+            <core:SfTextInputLayout 
+                Grid.Row="6"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Hint="Cidade" 
+                ReserveSpaceForAssistiveLabels="False"
+                InputViewPadding="7"
+                ContainerBackground="#fff"
+                ContainerType="Outlined">
+                <editors:SfAutocomplete x:Name="cidadeCarroceria" Text="{Binding Romaneio.PlacaCidade, Mode=TwoWay}"/>
+            </core:SfTextInputLayout>
+
+            <core:SfTextInputLayout 
+                Grid.Row="6"
+                Grid.Column="3"
+                Hint="Estado" 
+                ReserveSpaceForAssistiveLabels="False"
+                InputViewPadding="7"
+                ContainerBackground="#fff"
+                ContainerType="Outlined">
+                <editors:SfAutocomplete x:Name="estadoCarroceria" Text="{Binding Romaneio.PlacaEstado, Mode=TwoWay}"/>
+            </core:SfTextInputLayout>
+
+            <core:SfTextInputLayout 
+                Grid.Row="7"
+                Grid.Column="0"
+                Hint="Largura" 
+                ReserveSpaceForAssistiveLabels="False"
+                InputViewPadding="7"
+                ContainerBackground="#fff"
+                ContainerType="Outlined">
+                <editors:SfAutocomplete x:Name="largura" Text="{Binding Romaneio.BauLargura, Mode=TwoWay}"/>
+            </core:SfTextInputLayout>
+
+            <core:SfTextInputLayout 
+                Grid.Row="7"
+                Grid.Column="1"
+                Hint="Altura" 
+                ReserveSpaceForAssistiveLabels="False"
+                InputViewPadding="7"
+                ContainerBackground="#fff"
+                ContainerType="Outlined">
+                <editors:SfAutocomplete x:Name="altura" Text="{Binding Romaneio.BauAltura, Mode=TwoWay}"/>
+            </core:SfTextInputLayout>
+
+            <core:SfTextInputLayout 
+                Grid.Row="7"
+                Grid.Column="2"
+                Hint="Profund." 
+                ReserveSpaceForAssistiveLabels="False"
+                InputViewPadding="7"
+                ContainerBackground="#fff"
+                ContainerType="Outlined">
+                <editors:SfAutocomplete x:Name="profundidade" Text="{Binding Romaneio.BauProfundidade, Mode=TwoWay}"/>
+            </core:SfTextInputLayout>
+
+            <core:SfTextInputLayout 
+                Grid.Row="8"
+                Grid.Column="0"
+                Grid.ColumnSpan="4"
+                Hint="Conferente" 
+
+                InputViewPadding="7"
+                ContainerBackground="#fff"
+                ContainerType="Outlined">
+                <editors:SfAutocomplete x:Name="conferente" Text="{Binding Romaneio.NomeConferente, Mode=TwoWay}"/>
+            </core:SfTextInputLayout>
+
+            <Button
+                Grid.Row="9"  
+                Grid.ColumnSpan="4"
+                Text="Gravar" 
+                SemanticProperties.Hint="Counts the number of times you click"
+                HorizontalOptions="Fill" 
+                Command="{Binding GravarCommand}"/>
+
+        </Grid>
+
+
+    </ScrollView>
+
+</ContentPage>

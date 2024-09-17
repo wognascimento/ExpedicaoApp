@@ -15,18 +15,26 @@
                 HorizontalOptions="Fill" 
                 Clicked="OnButtonClicked"/>
 
+            <Button
+                x:Name="BtnPreConferencia"
+                Text="Pré-Conferência" 
+                SemanticProperties.Hint="Counts the number of times you click"
+                HorizontalOptions="Fill" 
+                Clicked="BtnPreConferenciaClicked"/>
 
             <Button
                 x:Name="BtnRomaneio"
                 Text="Romaneio Caminhão" 
                 SemanticProperties.Hint="Counts the number of times you click"
-                HorizontalOptions="Fill" />
+                HorizontalOptions="Fill" 
+                Clicked="BtnRomaneioClicked"/>
 
             <Button
                 x:Name="BtnVolumeShopping"
                 Text="Carga Shopping" 
                 SemanticProperties.Hint="Counts the number of times you click"
-                HorizontalOptions="Fill" />
+                HorizontalOptions="Fill" 
+                Clicked="BtnVolumeShoppingClicked"/>
 
 
 
