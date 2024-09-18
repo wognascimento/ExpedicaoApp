@@ -55,7 +55,7 @@ public partial class VolumeShopping : ContentPage
                 if (lookup != null)
                 {
                     var encontrado = await vm.GetItemsAsync(lookup.Barcode);
-                    await vm.SaveVolumeAsync(new Model.VolumeShoppinModel { Barcode = lookup.Barcode, Caminhao = vm.RomaneioModel.PlacaCaminhao, Data = vm.RomaneioModel.DataCarregamento, Resp = vm.RomaneioModel.NomeConferente });
+                    await vm.SaveVolumeAsync(new Model.VolumeShoppinModel { Barcode = lookup.Barcode, Caminhao = vm.RomaneioModel.PlacaCaminhao, Data = vm.RomaneioModel.DataCarregamento, Resp = vm.RomaneioModel.NomeConferente, manual = false });
                     var pSucess = audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync("sucess.mp3"));
                     pSucess.Play();
 

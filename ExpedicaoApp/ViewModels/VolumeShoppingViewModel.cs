@@ -6,8 +6,6 @@ using Newtonsoft.Json;
 using Plugin.Maui.Audio;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using Telerik.Maui.Controls.Compatibility.Barcode;
-using static Microsoft.Maui.ApplicationModel.Permissions;
 
 namespace ExpedicaoApp.ViewModels
 {
@@ -258,7 +256,7 @@ namespace ExpedicaoApp.ViewModels
                 var l = await lookup.GetItenCodigoAsync(LookupModel.Qrcode);
                 if (l != null)
                 {
-                    var vol = new VolumeShoppinModel { Barcode = l.Barcode, Caminhao = RomaneioModel.PlacaCaminhao, Data = RomaneioModel.DataCarregamento, Resp = RomaneioModel.NomeConferente };
+                    var vol = new VolumeShoppinModel { Barcode = l.Barcode, Caminhao = RomaneioModel.PlacaCaminhao, Data = RomaneioModel.DataCarregamento, Resp = RomaneioModel.NomeConferente, manual = true };
                     await volume.SaveItemAsync(vol);
                     var pSucess = audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync("sucess.mp3"));
                     pSucess.Play();

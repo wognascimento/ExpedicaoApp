@@ -11,5 +11,6 @@ namespace ExpedicaoApp.Model
         public string Resp { get; set; }
         public string Caminhao { get; set; }
         public bool Enviado { get; set; } = false;
+        public bool manual { get; set; } = false;
     }
 }

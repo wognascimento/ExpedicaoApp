@@ -109,6 +109,14 @@ namespace ExpedicaoApp.ViewModels
                 return;
             }
 
+            if (Romaneio.CodRomaneiro > 0)
+            {
+                await RomaneioRepository.SaveItemAsync(Romaneio);
+                await App.Current.MainPage.DisplayAlert("Sucesso", "Romaneio Salvo com Sucesso!!!", "OK");
+                //Romaneio = new();
+                return;
+            }
+
             string apiUrl = "https://api.cipolatti.com.br:44366/api/Romaneio/romaneio";
             JsonSerializerOptions options = new()
             {
@@ -146,7 +154,10 @@ namespace ExpedicaoApp.ViewModels
                 else
                 {
                     //Console.WriteLine($"Erro: {response.StatusCode} - {response.ReasonPhrase}");
-                    await App.Current.MainPage.DisplayAlert("Erro", $"Erro: {response.StatusCode} - {response.ReasonPhrase}", "OK");
+                    //await App.Current.MainPage.DisplayAlert("Erro", $"Erro: {response.StatusCode} - {response.ReasonPhrase}", "OK");
+
+                    string errorMessage = await response.Content.ReadAsStringAsync();
+                    await App.Current.MainPage.DisplayAlert("Erro", errorMessage, "OK");
                 }
             }
             catch (Exception ex)

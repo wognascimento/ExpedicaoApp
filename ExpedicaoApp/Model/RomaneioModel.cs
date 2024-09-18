@@ -6,7 +6,7 @@ namespace ExpedicaoApp.Model
     public class RomaneioModel : ObservableObject
     {
         [PrimaryKey]
-        public int CodRomaneiro { get; set; }
+        public int? CodRomaneiro { get; set; } = null;
         public DateTime DataCarregamento { get; set; } = DateTime.Now;
         public TimeSpan HoraChegada { get; set; }
         public int Codtransportadora { get; set; }

@@ -47,7 +47,8 @@ public partial class Romaneio : ContentPage
             }
             else
             {
-                Console.WriteLine($"Erro: {response.StatusCode} - {response.ReasonPhrase}");
+                string errorMessage = await response.Content.ReadAsStringAsync();
+                await DisplayAlert("Erro", errorMessage, "OK");
             }
         }
         catch (Exception ex)
@@ -76,7 +77,41 @@ public partial class Romaneio : ContentPage
             }
             else
             {
-                Console.WriteLine($"Erro: {response.StatusCode} - {response.ReasonPhrase}");
+                string errorMessage = await response.Content.ReadAsStringAsync();
+                await DisplayAlert("Erro", errorMessage, "OK");
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Erro ao carregar Siglas", ex.Message, "OK");
+        }
+    }
+
+    private async void NCaminhao_ValueChanged(object sender, Syncfusion.Maui.Inputs.NumericEntryValueChangedEventArgs e)
+    {
+        RomaneioViewModel vm = (RomaneioViewModel)BindingContext;
+        try
+        {
+            string apiUrl = "https://api.cipolatti.com.br:44366/api/Romaneio/romaneio";
+            HttpClientHandler handler = new()
+            {
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
+            };
+            using HttpClient client = new(handler);
+            //string urlComParametro = $"{apiUrl}";
+            string urlComParametro = $"{apiUrl}?idRomaneio={e.NewValue}";
+            HttpResponseMessage response = await client.GetAsync(urlComParametro);
+            if (response.IsSuccessStatusCode)
+            {
+                string responseBody = await response.Content.ReadAsStringAsync();
+                vm.Romaneio = JsonConvert.DeserializeObject<RomaneioModel>(responseBody);
+                //await RomaneioRepository.SaveItemAsync(vm.Romaneio);
+                //await DisplayAlert("Sucesso", "Romaneio Salvo com Sucesso!!!", "OK");
+            }
+            else
+            {
+                string errorMessage = await response.Content.ReadAsStringAsync();
+                await DisplayAlert("Erro ao carregar Romaneio", errorMessage, "OK");
             }
         }
         catch (Exception ex)
