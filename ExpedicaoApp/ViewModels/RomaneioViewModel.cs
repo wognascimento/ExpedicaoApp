@@ -140,7 +140,7 @@ namespace ExpedicaoApp.ViewModels
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
                     Romaneio = JsonConvert.DeserializeObject<RomaneioModel>(responseBody);
-                    await RomaneioRepository.SaveItemAsync(Romaneio);
+                    //await RomaneioRepository.SaveItemAsync(Romaneio);
                     await App.Current.MainPage.DisplayAlert("Sucesso", "Romaneio Salvo com Sucesso!!!", "OK");
 
                     //bool lookup = await App.Current.MainPage.DisplayAlert("Romaneio Salvo com Sucesso!", "Deseja realizar Lookup?", "Sim", "Não");
