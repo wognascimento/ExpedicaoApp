@@ -83,7 +83,7 @@ namespace ExpedicaoApp.DataBaseLocal
             }
         }
 
-        public async Task LookupAsync(string sigla)
+        public async Task LookupAsync(string sigla, string caminhao)
         {
             try
             {
@@ -93,25 +93,30 @@ namespace ExpedicaoApp.DataBaseLocal
                     ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
                 };
                 using HttpClient client = new(handler);
-                string apiUrl = "https://api.cipolatti.com.br:44366/api/Lookup/LookupBySigla"; //api/Lookup/LookupBySigla?sigla=TOP
+                //string apiUrl = "https://api.cipolatti.com.br:44366/api/Lookup/LookupBySigla"; //api/Lookup/LookupBySigla?sigla=TOP
+                string apiUrl = "https://api.cipolatti.com.br:44366/api/Lookup/lookupBySiglaByCaminhao"; //api/Lookup/LookupBySigla?sigla=TOP
                 //string parametro = qrCode;
-                foreach (var item in sigla.Split(','))
+                foreach (var Sigla in sigla.Split(','))
                 {
-                    string urlComParametro = $"{apiUrl}?sigla={item}";
-                    HttpResponseMessage response = await client.GetAsync(urlComParametro);
-                    if (response.IsSuccessStatusCode)
+                    foreach (var Caminhao in caminhao.Split(','))
                     {
-                        string responseBody = await response.Content.ReadAsStringAsync();
-                        var lookups = JsonConvert.DeserializeObject<ObservableCollection<LookupModel>>(responseBody);
-                        foreach (var lookup in lookups)
+                        string urlComParametro = $"{apiUrl}?sigla={Sigla}&caminhao={Caminhao}";
+                        HttpResponseMessage response = await client.GetAsync(urlComParametro);
+                        if (response.IsSuccessStatusCode)
                         {
-                            SaveItemAsync(lookup);
+                            string responseBody = await response.Content.ReadAsStringAsync();
+                            var lookups = JsonConvert.DeserializeObject<ObservableCollection<LookupModel>>(responseBody);
+                            foreach (var lookup in lookups)
+                            {
+                                SaveItemAsync(lookup);
+                            }
                         }
-                    }
-                    else
-                    {
-                        //await DisplayAlert("Erro", $"{response.StatusCode} - {response.ReasonPhrase}", "OK");
-                        throw new InvalidOperationException($"{response.StatusCode} - {response.ReasonPhrase}");
+                        else
+                        {
+                            //await DisplayAlert("Erro", $"{response.StatusCode} - {response.ReasonPhrase}", "OK");
+                            throw new InvalidOperationException($"{response.StatusCode} - {response.ReasonPhrase}");
+                        }
+
                     }
                 }
 

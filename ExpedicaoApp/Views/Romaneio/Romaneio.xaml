@@ -187,7 +187,7 @@
                 InputViewPadding="7"
                 ContainerBackground="#fff"
                 ContainerType="Outlined">
-                <editors:SfAutocomplete x:Name="cavalo" Text="{Binding Romaneio.PlacaCarroceria, Mode=TwoWay}"/>
+                <editors:SfAutocomplete x:Name="cavalo" Text="{Binding Romaneio.PlacaCaminhao, Mode=TwoWay}"/>
             </core:SfTextInputLayout>
 
             <core:SfTextInputLayout 
@@ -199,7 +199,7 @@
                 InputViewPadding="7"
                 ContainerBackground="#fff"
                 ContainerType="Outlined">
-                <editors:SfAutocomplete x:Name="cidade" Text="{Binding Romaneio.PlacaCarroceriaCidade, Mode=TwoWay}"/>
+                <editors:SfAutocomplete x:Name="cidade" Text="{Binding Romaneio.PlacaCidade, Mode=TwoWay}"/>
             </core:SfTextInputLayout>
 
             <core:SfTextInputLayout 
@@ -210,7 +210,7 @@
                 InputViewPadding="7"
                 ContainerBackground="#fff"
                 ContainerType="Outlined">
-                <editors:SfAutocomplete x:Name="estado" Text="{Binding Romaneio.PlacaCarroceriaEstado, Mode=TwoWay}"/>
+                <editors:SfAutocomplete x:Name="estado" Text="{Binding Romaneio.PlacaEstado, Mode=TwoWay}"/>
             </core:SfTextInputLayout>
 
 
@@ -222,7 +222,7 @@
                 InputViewPadding="7"
                 ContainerBackground="#fff"
                 ContainerType="Outlined">
-                <editors:SfAutocomplete x:Name="carroceria" Text="{Binding Romaneio.PlacaCaminhao, Mode=TwoWay}"/>
+                <editors:SfAutocomplete x:Name="carroceria" Text="{Binding Romaneio.PlacaCarroceria, Mode=TwoWay}"/>
             </core:SfTextInputLayout>
 
             <core:SfTextInputLayout 
@@ -234,7 +234,7 @@
                 InputViewPadding="7"
                 ContainerBackground="#fff"
                 ContainerType="Outlined">
-                <editors:SfAutocomplete x:Name="cidadeCarroceria" Text="{Binding Romaneio.PlacaCidade, Mode=TwoWay}"/>
+                <editors:SfAutocomplete x:Name="cidadeCarroceria" Text="{Binding Romaneio.PlacaCarroceriaCidade, Mode=TwoWay}"/>
             </core:SfTextInputLayout>
 
             <core:SfTextInputLayout 
@@ -245,7 +245,7 @@
                 InputViewPadding="7"
                 ContainerBackground="#fff"
                 ContainerType="Outlined">
-                <editors:SfAutocomplete x:Name="estadoCarroceria" Text="{Binding Romaneio.PlacaEstado, Mode=TwoWay}"/>
+                <editors:SfAutocomplete x:Name="estadoCarroceria" Text="{Binding Romaneio.PlacaCarroceriaEstado, Mode=TwoWay}"/>
             </core:SfTextInputLayout>
 
             <core:SfTextInputLayout 

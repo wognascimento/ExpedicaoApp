@@ -34,6 +34,9 @@ namespace ExpedicaoApp.ViewModels
         string siglas;
 
         [ObservableProperty]
+        string caminhao;
+
+        [ObservableProperty]
         ObservableCollection<QryAprovados> aprovadosSelectedItems = [];
 
         [ObservableProperty]
@@ -199,9 +202,14 @@ namespace ExpedicaoApp.ViewModels
                 if(AprovadosSelectedItems.Count > 0)
                     Siglas = string.Join(",", AprovadosSelectedItems.Select(a => a.SiglaServ));
 
-                Debug.WriteLine(Siglas);
+                //Debug.WriteLine(Siglas);
                 await lookup.DeleteAllItems<LookupModel>();
-                await lookup.LookupAsync(Siglas);
+
+                //await App.Current.MainPage.DisplayPromptAsync("Lookup", "Lookup finalizado!!!", "OK");
+
+                caminhao = await App.Current.MainPage.DisplayPromptAsync("Informe o número do caminhão separado por ','", "Por exemplo 1,2,3...");
+
+                await lookup.LookupAsync(Siglas, caminhao);
                 Y = await lookup.GetTotItemAsync();
                 await App.Current.MainPage.DisplayAlert("Lookup", "Lookup finalizado!!!", "OK");
 
@@ -226,7 +234,7 @@ namespace ExpedicaoApp.ViewModels
 
                 await volume.SendVolumesAsync();
                 await lookup.DeleteAllItems<LookupModel>();
-                await lookup.LookupAsync(Siglas);
+                await lookup.LookupAsync(Siglas, caminhao);
                 Y = await lookup.GetTotItemAsync();
                 var tot = await GetTotItensCarregadosAsync();
                 X = tot.Count;
@@ -285,7 +293,7 @@ namespace ExpedicaoApp.ViewModels
 
                 await volume.SendPreConferenciaAsync();
                 await lookup.DeleteAllItems<LookupModel>();
-                await lookup.LookupAsync(Siglas);
+                await lookup.LookupAsync(Siglas, caminhao);
                 Y = await lookup.GetTotItemAsync();
                 var tot = await GetTotItensCarregadosAsync();
                 X = tot.Count;

@@ -11,8 +11,13 @@ namespace ExpedicaoApp.Model
         public TimeSpan HoraChegada { get; set; }
         public int Codtransportadora { get; set; }
         public string NomeMotorista { get; set; }
-
-        //public string PlacaCaminhao { get; set; }
+        public string PlacaCaminhao { get; set; }
+        public string PlacaCidade { get; set; }
+        public string PlacaEstado { get; set; }
+        public string PlacaCarroceria { get; set; }
+        public string PlacaCarroceriaCidade { get; set; }
+        public string PlacaCarroceriaEstado { get; set; }
+        /*
         private string _placaCaminhao;
         public string PlacaCaminhao
         {
@@ -77,7 +82,7 @@ namespace ExpedicaoApp.Model
                 }
             }
         }
-
+        */
         public string NumeroContainer { get; set; }
         public double? BauAltura { get; set; }
         public double? BauLargura { get; set; }
