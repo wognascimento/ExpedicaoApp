@@ -264,7 +264,7 @@ namespace ExpedicaoApp.ViewModels
                 var l = await lookup.GetItenCodigoAsync(LookupModel.Qrcode);
                 if (l != null)
                 {
-                    var vol = new VolumeShoppinModel { Barcode = l.Barcode, Caminhao = RomaneioModel.PlacaCaminhao, Data = RomaneioModel.DataCarregamento, Resp = RomaneioModel.NomeConferente, manual = true };
+                    var vol = new VolumeShoppinModel { Barcode = l.Barcode, Caminhao = RomaneioModel.PlacaCarroceria, Data = RomaneioModel.DataCarregamento, Resp = RomaneioModel.NomeConferente, manual = true };
                     await volume.SaveItemAsync(vol);
                     var pSucess = audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync("sucess.mp3"));
                     pSucess.Play();
@@ -274,7 +274,7 @@ namespace ExpedicaoApp.ViewModels
                 {
                     var pError = audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync("error.mp3"));
                     pError.Play();
-                    await App.Current.MainPage.DisplayAlert("Result", "Volume não Presednte no Lookup", "OK");
+                    await App.Current.MainPage.DisplayAlert("Result", "Volume não Presente no Lookup", "OK");
                 }
             }
             catch (Exception ex)

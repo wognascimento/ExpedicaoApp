@@ -55,7 +55,7 @@ public partial class VolumeShopping : ContentPage
                 if (lookup != null)
                 {
                     var encontrado = await vm.GetItemsAsync(lookup.Barcode);
-                    await vm.SaveVolumeAsync(new Model.VolumeShoppinModel { Barcode = lookup.Barcode, Caminhao = vm.RomaneioModel.PlacaCaminhao, Data = vm.RomaneioModel.DataCarregamento, Resp = vm.RomaneioModel.NomeConferente, manual = false });
+                    await vm.SaveVolumeAsync(new Model.VolumeShoppinModel { Barcode = lookup.Barcode, Caminhao = vm.RomaneioModel.PlacaCarroceria, Data = vm.RomaneioModel.DataCarregamento, Resp = vm.RomaneioModel.NomeConferente, manual = false });
                     var pSucess = audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync("sucess.mp3"));
                     pSucess.Play();
 
@@ -68,7 +68,7 @@ public partial class VolumeShopping : ContentPage
                     var pError = audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync("error.mp3"));
                     pError.Play();
                     Camera.IsScanning = false;
-                    await DisplayAlert("Result", "Volume não Presednte no Lookup", "OK");
+                    await DisplayAlert("Result", "Volume não Presente no Lookup", "OK");
                     Camera.IsScanning = true;
                 }
             }
